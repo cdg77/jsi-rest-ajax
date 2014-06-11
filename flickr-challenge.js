@@ -52,7 +52,7 @@ $( document ).ready(function() {
         alt: "View on Flickr",
         size: "100%"});
 
-      $(nextImg).appendTo('div.photo_square:last-child');
+      $(nextImg).appendTo(nextDiv);
 
       $(nextImg).wrap($('<a></a>', {href: imgUrl}));
       setUrl(counter);
@@ -63,13 +63,13 @@ $( document ).ready(function() {
     $(window).scroll(function() {
       if($(window).scrollTop() + $(window).height() === getDocHeight()) {
         if (counter <= maxPages) {
-          requestFromFlickr(url);
+          requestFromFlickr(setUrl(counter));
         }
       }
     });
   };
 
-  requestFromFlickr(url);
+  requestFromFlickr(setUrl(counter));
   checkScrolling();
 
 
