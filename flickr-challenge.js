@@ -62,11 +62,8 @@ var checkScrolling = function () {$(window).scroll(function() {
        if($(window).scrollTop() + $(window).height() === getDocHeight()) {
         if (counter <= maxPages) {
           console.log(counter, maxPages);
-          alert('botom');
           requestFromFlickr(url);
         }
-        else {
-       alert('Nothing new to see here');}
    }
 
 });};
