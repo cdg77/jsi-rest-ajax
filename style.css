@@ -1,0 +1,10 @@
+.photo_square {
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+  margin: 4%;
+}
+
+.photo_square > img {
+  size: 100%;
+}
