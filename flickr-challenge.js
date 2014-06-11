@@ -3,16 +3,18 @@ $( document ).ready(function() {
 
   var counter = 1;
 
-  var buildRequestUrl = function (pageCount) {
-    var url = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=38ebaada8366e437d637ddfb76023f44&page=" +
-    pageCount + "&format=json";
-    return url;
-  };
+
 
   var maxPages = 1;
 
-  var requestFromFlickr = function(url) {
-    $.ajax(buildRequestUrl(counter), { dataType: 'jsonp', jsonp: 'jsoncallback' })
+  var requestFromFlickr = function() {
+    var data = {
+      method: 'flickr.interestingness.getList',
+      api_key: '38ebaada8366e437d637ddfb76023f44',
+      page: counter,
+      format: 'json'
+    };
+    $.ajax('https://api.flickr.com/services/rest/', { data: data, dataType: 'jsonp', jsonp: 'jsoncallback' })
       .then(function(data, status, xhr) {
         counter += 1;
         maxPages = data.photos.pages;
@@ -45,7 +47,6 @@ $( document ).ready(function() {
       $(nextImg).appendTo(nextDiv);
 
       $(nextImg).wrap($('<a></a>', {href: imgUrl}));
-      buildRequestUrl(counter);
     });
   };
 
@@ -54,13 +55,13 @@ $( document ).ready(function() {
       if($(window).scrollTop() +
         $(window).height() === $(document).height()) {
           if (counter <= maxPages) {
-            requestFromFlickr(buildRequestUrl(counter));
+            requestFromFlickr();
           }
       }
     });
   };
 
-  requestFromFlickr(buildRequestUrl(counter));
+  requestFromFlickr();
   checkScrolling();
 
 
