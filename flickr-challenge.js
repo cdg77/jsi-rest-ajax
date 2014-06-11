@@ -7,16 +7,36 @@ $.ajax(url, { dataType: 'jsonp', jsonp: 'jsoncallback' })
   console.log(status);
   console.log(data.photos.photo[0]);
 
-var currentPhoto = data.photos.photo[0];
+  var currentRow = data.photos.photo;
 
-var imgUrl = 'https://farm' + currentPhoto.farm + 
-  '.staticflickr.com/' + currentPhoto.server + 
-  '/' + currentPhoto.id + '_' + currentPhoto.secret +
-  '.jpg';
- 
-var spam =  $('<img>', { src : imgUrl });
+  currentRow.forEach(function (photo, index) {
 
-$(spam).insertAfter('h1');
+    var nextDiv = $('<div/>', {
+      'class': 'photo_square'
+    });
+    console.log('Creating the number ' + index + ' photo div');
+
+    $(nextDiv).appendTo('div.container');
+    console.log('Appending #'+ index + ' to container');
+
+    var imgUrl = 'https://farm' + photo.farm +
+      '.staticflickr.com/' + photo.server +
+      '/' + photo.id + '_' + photo.secret +
+      '.jpg';
+    console.log('Building #' + index + ' image url');
+
+    var nextImg =  $('<img>', { src : imgUrl,
+      alt: "View on Flickr",
+      size: "100%"});
+    console.log('Adding #' + index + ' img tag');
+
+    $(nextImg).appendTo('div.photo_square:last-child');
+    console.log('Appending #' + index + ' to its div');
+
+    $(nextImg).wrap($('<a></a>', {href: imgUrl}));
+    console.log('Wrapping #' + index + ' with an a tag');
+
+  }, this);
 
 
 }, function(xhr, status, error){
