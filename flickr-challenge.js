@@ -1,6 +1,5 @@
 $( document ).ready(function() {
 
-
 var counter = 1;
 var url = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=38ebaada8366e437d637ddfb76023f44&page=" + 
   counter + "&format=json";
@@ -29,9 +28,9 @@ var getDocHeight = function() {
 
 var displayPhotos = function (data, status, xhr) {
 
-  var currentRow = data.photos.photo;
+  var photoArray = data.photos.photo;
 
-  currentRow.forEach(function (photo, index) {
+  photoArray.forEach(function (photo, index) {
 
     var nextDiv = $('<div/>', {
       'class': 'photo_square'
