@@ -1,3 +1,7 @@
+h1 {
+  text-align: center;
+}
+
 .photo_square {
   /*position: relative;*/
   height: 150px;
