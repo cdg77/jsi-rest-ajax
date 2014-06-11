@@ -1,9 +1,21 @@
 $( document ).ready(function() {
 
-var url = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=38ebaada8366e437d637ddfb76023f44&format=json";
 
+var counter = 1;
+var url = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=38ebaada8366e437d637ddfb76023f44&page=" + 
+  counter + "&format=json";
+
+
+var requestFromFlickr = function(url) {
 $.ajax(url, { dataType: 'jsonp', jsonp: 'jsoncallback' })
-.then(function (data, status, xhr) {
+.then(function(data, status, xhr) {
+  displayPhotos(data, status, xhr); }, function(xhr, status, error){
+  console.log('You have created some error Now');
+  console.log(error);
+});
+
+};
+var displayPhotos = function (data, status, xhr) {
   console.log(status);
   console.log(data.photos.photo[0]);
 
@@ -36,13 +48,12 @@ $.ajax(url, { dataType: 'jsonp', jsonp: 'jsoncallback' })
     $(nextImg).wrap($('<a></a>', {href: imgUrl}));
     console.log('Wrapping #' + index + ' with an a tag');
 
-  }, this);
+  });
 
 
-}, function(xhr, status, error){
-  console.log('You have created some error Now');
-  console.log(error);
-});
+};
+
+requestFromFlickr(url);
 
 });
 
