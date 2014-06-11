@@ -19,8 +19,7 @@ $( document ).ready(function() {
 
         displayPhotos(data, status, xhr);
       }, function(xhr, status, error){
-        console.log('You have created some error Now');
-        console.log(error);
+        
       });
   };
 
