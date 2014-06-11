@@ -23,16 +23,6 @@ $( document ).ready(function() {
       });
   };
 
-  var getDocHeight = function() {
-    var D = document;
-    return Math.max(
-        D.body.scrollHeight, D.documentElement.scrollHeight,
-        D.body.offsetHeight, D.documentElement.offsetHeight,
-        D.body.clientHeight, D.documentElement.clientHeight
-    );
-  };
-
-
   var displayPhotos = function (data, status, xhr) {
     var photoArray = data.photos.photo;
     photoArray.forEach(function (photo, index) {
@@ -61,10 +51,11 @@ $( document ).ready(function() {
 
   var checkScrolling = function () {
     $(window).scroll(function() {
-      if($(window).scrollTop() + $(window).height() === getDocHeight()) {
-        if (counter <= maxPages) {
-          requestFromFlickr(setUrl(counter));
-        }
+      if($(window).scrollTop() +
+        $(window).height() === $(document).height()) {
+          if (counter <= maxPages) {
+            requestFromFlickr(setUrl(counter));
+          }
       }
     });
   };
